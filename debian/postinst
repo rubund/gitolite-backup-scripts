@@ -36,6 +36,7 @@ case "$1" in
 
         mkdir -p /var/lib/backup-gitolite
         chown $USERNAME:$USERNAME /var/lib/backup-gitolite
+        chmod o-rwx /var/lib/backup-gitolite
 
         if [ -d /var/lib/backup-gitolite/$USERNAME ] ; then
             echo "Already set up"
