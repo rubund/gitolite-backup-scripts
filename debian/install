@@ -1,0 +1,3 @@
+scripts/gitolite_backup_run /usr/bin/
+git-encrypt /usr/lib/gitolite-backup-scripts/
+config/gitconfig /usr/share/gitolite-backup-scripts/

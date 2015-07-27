@@ -1,0 +1,19 @@
+Template: gitolite-backup-scripts/gitoliteuser
+Type: string
+Default: gitolite3
+Description: Enter the user name for the gitolite user
+
+Template: gitolite-backup-scripts/remoteserver
+Type: string
+Default: naturfakta.no
+Description: Enter the address for the remote server
+
+Template: gitolite-backup-scripts/salt
+Type: string
+Default: 
+Description: Enter the salt
+
+Template: gitolite-backup-scripts/key
+Type: password
+Default: 
+Description: Enter the key
