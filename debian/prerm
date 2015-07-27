@@ -19,7 +19,6 @@ set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
-        a2dissite naturfakta.conf
         #rm /var/www/packages/bilder/www/bilder
     ;;
 

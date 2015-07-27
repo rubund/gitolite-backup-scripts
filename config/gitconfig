@@ -12,6 +12,3 @@
 	clean = gitcrypt clean
 [diff "encrypt"]
 	textconv = gitcrypt diff
-[remote "origin"]
-	url = REMOTESERVER
-	fetch = +refs/heads/*:refs/remotes/origin/*
