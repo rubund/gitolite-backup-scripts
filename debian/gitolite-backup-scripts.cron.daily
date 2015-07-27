@@ -2,4 +2,4 @@
 
 . /etc/gitolite-backup-scripts.conf
 
-su $GITOLITEUSER -c "/usr/bin/gitolite_backup_run" 
+su $GITOLITEUSER -c "/usr/lib/gitolite-backup-scripts/bin/gitolite_backup_run" 
