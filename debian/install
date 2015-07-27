@@ -3,3 +3,4 @@ git-encrypt /usr/lib/gitolite-backup-scripts/
 config/gitconfig /usr/share/gitolite-backup-scripts/
 config/attributes /usr/share/gitolite-backup-scripts/
 config/gitolite-backup-scripts.conf /etc/
+config/gitignore /usr/share/gitolite-backup-scripts/
