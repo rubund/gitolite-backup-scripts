@@ -50,6 +50,11 @@ case "$1" in
             su $USERNAME -c "sed -i 's/pass = PASS$/pass = ${KEY}/' /var/lib/backup-gitolite/$USERNAME/.git/config"
             su $USERNAME -c "git remote add origin ${SERVER}"
         fi
+        sed -i 's/GITOLITEUSER=.*$/GITOLITEUSER='${USERNAME}'/' /etc/gitolite-backup-scripts.conf
+        echo "================================="
+        echo "Manual action required:          "
+        echo "   upload public key to server   "
+        echo "================================="
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

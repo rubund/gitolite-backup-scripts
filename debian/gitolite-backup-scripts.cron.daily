@@ -1,0 +1,5 @@
+#!/bin/sh
+
+. /etc/gitolite-backup-scripts.conf
+
+su $GITOLITEUSER -c "/usr/bin/gitolite_backup_run" 
