@@ -45,7 +45,6 @@ case "$1" in
             su $USERNAME -c "git init /var/lib/backup-gitolite/$USERNAME"
             cd /var/lib/backup-gitolite/$USERNAME
             #PATH="$PATH:/usr/lib/gitolite-backup-scripts/git-encrypt" gitcrypt init 
-            su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/gitignore /var/lib/backup-gitolite/$USERNAME/.gitignore"
             su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/gitconfig /var/lib/backup-gitolite/$USERNAME/.git/config"
             su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/attributes /var/lib/backup-gitolite/$USERNAME/.git/info/attributes"
             su $USERNAME -c "sed -i 's/salt = SALT$/salt = ${SALT}/' /var/lib/backup-gitolite/$USERNAME/.git/config"
@@ -53,6 +52,7 @@ case "$1" in
             su $USERNAME -c "git remote add origin ${SERVER}"
         fi
         sed -i 's/GITOLITEUSER=.*$/GITOLITEUSER='${USERNAME}'/' /etc/gitolite-backup-scripts.conf
+        su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/gitignore /var/lib/backup-gitolite/$USERNAME/.gitignore"
         echo "================================="
         echo "Manual action required:          "
         echo "   upload public key to server   "
