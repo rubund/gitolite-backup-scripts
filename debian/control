@@ -11,6 +11,6 @@ Homepage: <insert the upstream URL, if relevant>
 Package: gitolite-backup-scripts
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, rsync, git,
-         openssh-client, gitolite3, openssl
+         openssh-client, gitolite3, openssl, anacron
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>
