@@ -10,5 +10,8 @@ cd /var/lib/backup-gitolite/gitolite3
 git add *
 git add */.*
 git commit -m "Regular commit"
+NOTHING=$?
 
-git push origin master
+if [ "$NOTHING" = "0" ] ; then
+  git push origin master
+fi
