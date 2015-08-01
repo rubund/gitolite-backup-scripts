@@ -5,8 +5,8 @@ Description: Enter the user name for the gitolite user
 
 Template: gitolite-backup-scripts/remoteserver
 Type: string
-Default: naturfakta.no
-Description: Enter the address for the remote server
+Default: user@address:/home/user/path
+Description: Enter the URL for the remote git repo
 
 Template: gitolite-backup-scripts/salt
 Type: string
