@@ -1,19 +1,19 @@
 Template: gitolite-backup-scripts/gitoliteuser
 Type: string
 Default: gitolite3
-Description: Enter the user name for the gitolite user
+_Description: Enter the user name for the gitolite user:
 
 Template: gitolite-backup-scripts/remoteserver
 Type: string
 Default: user@address:/home/user/path
-Description: Enter the URL for the remote git repo
+_Description: Enter the URL for the remote git repo:
 
 Template: gitolite-backup-scripts/salt
 Type: string
 Default: 
-Description: Enter the salt
+_Description: Enter the salt:
 
 Template: gitolite-backup-scripts/key
 Type: password
 Default: 
-Description: Enter the key
+_Description: Enter the key:
