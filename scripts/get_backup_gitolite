@@ -1,0 +1,23 @@
+#!/bin/sh
+
+export PATH="$PATH:/usr/lib/gitolite-backup-scripts/git-encrypt"
+
+BACKUPPATH=$1
+LOCALPATH=$2
+
+
+if [ "$BACKUPPATH" = "" ] ; then
+  echo "Missing backup path"
+  exit
+fi
+if [ "$LOCALPATH" = "" ] ; then
+  echo "Missing local path"
+  exit
+fi
+
+git clone -n $BACKUPPATH $LOCALPATH
+
+cd $LOCALPATH
+gitcrypt init
+
+git reset --hard HEAD
