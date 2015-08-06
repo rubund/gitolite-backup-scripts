@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#Script for keeping to git repos in a gitolite setup in sync
+# Script for keeping git repos in two different gitolite setups in sync
+# over an encrypted remote storage area
 
 export PATH="$PATH:/usr/lib/gitolite-backup-scripts/git-encrypt"
 source /etc/gitolite-backup-scripts.conf
