@@ -18,6 +18,9 @@ fi
 
 if [ -d $LOCALPATH ] ; then
   echo "Already cloned"
+  pushd $LOCALPATH
+   git pull origin master
+  popd
 else
   get_backup_gitolite $BACKUPPATH $LOCALPATH
 fi
