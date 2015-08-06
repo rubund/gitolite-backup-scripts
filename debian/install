@@ -1,6 +1,6 @@
 scripts/gitolite_backup_run /usr/lib/gitolite-backup-scripts/bin/
 scripts/get_backup_gitolite /usr/bin/
-scripts/gitolite_keep_in_sync /usr/lib/gitolite-backup-scripts/bin/
+scripts/gitolite_keep_in_sync /usr/bin/
 git-encrypt /usr/lib/gitolite-backup-scripts/
 config/gitconfig /usr/share/gitolite-backup-scripts/
 config/attributes /usr/share/gitolite-backup-scripts/
