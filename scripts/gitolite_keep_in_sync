@@ -34,8 +34,10 @@ REPOS=`ls ${LOCALPATH}/repositories`
 
 mkdir -p from to
 
+
 for REPO in $REPOS;
 do echo $REPO
+  CONTINUE=1
   if [ "$REPO" = "gitolite-admin.git" ] ; then
     continue
   fi
@@ -46,14 +48,21 @@ do echo $REPO
     popd
   else
     git clone $LOCALPATH/repositories/$REPO from/$REPO
+    if [ "$?" = "0" ]; then
+      CONTINUE=1
+    else
+      CONTINUE=0
+    fi
   fi
-  if [ -d to/$REPO ] ; then
-    echo "to/$REPO is already cloned"
-    pushd to/$REPO
-    git pull origin master
-    popd
-  else
-    git clone $GITOLITEUSER@localhost:$REPO to/$REPO
+  if [ "$CONTINUE" = "1" ] ; then
+    if [ -d to/$REPO ] ; then
+      echo "to/$REPO is already cloned"
+      pushd to/$REPO
+      git pull origin master
+      popd
+    else
+      git clone $GITOLITEUSER@localhost:$REPO to/$REPO
+    fi
   fi
 done
 
