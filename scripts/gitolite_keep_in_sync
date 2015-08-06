@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Script for keeping to git repos in a gitolite setup in sync
+
 export PATH="$PATH:/usr/lib/gitolite-backup-scripts/git-encrypt"
 source /etc/gitolite-backup-scripts.conf
 
