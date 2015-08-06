@@ -28,6 +28,7 @@ else
 fi
 
 mkdir -p /tmp/gitolite_keep_in_sync
+chmod go-rwx /tmp/gitolite_keep_in_sync
 cd /tmp/gitolite_keep_in_sync
 
 REPOS=`ls ${LOCALPATH}/repositories`
