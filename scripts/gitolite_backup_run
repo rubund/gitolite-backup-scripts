@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export PATH="$PATH:/usr/lib/gitolite-backup-scripts/git-encrypt"
+export PATH="$PATH:/usr/lib/git-encrypt"
 
 rsync -a -v -u /var/lib/gitolite3/ /var/lib/backup-gitolite/gitolite3
 

@@ -5,7 +5,7 @@
 #
 # Currently only the master branch is kept in sync
 
-export PATH="$PATH:/usr/lib/gitolite-backup-scripts/git-encrypt"
+export PATH="$PATH:/usr/lib/git-encrypt"
 source /etc/gitolite-backup-scripts.conf
 
 BACKUPPATH=$1
