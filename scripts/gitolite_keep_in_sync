@@ -22,13 +22,18 @@ if [ "$LOCALPATH" = "" ] ; then
 fi
 
 if [ -d $LOCALPATH ] ; then
-  echo "Already cloned"
+  echo "Already cloned. Pulling..."
+  echo ""
   pushd $LOCALPATH
    git pull origin master
   popd
 else
   get_backup_gitolite $BACKUPPATH $LOCALPATH
 fi
+
+echo ""
+echo ""
+echo ""
 
 mkdir -p /tmp/gitolite_keep_in_sync
 chmod go-rwx /tmp/gitolite_keep_in_sync
@@ -38,49 +43,68 @@ REPOS=`ls ${LOCALPATH}/repositories`
 
 mkdir -p from to
 
-
 for REPO in $REPOS;
-do echo $REPO
+do
   CONTINUE=1
   if [ "$REPO" = "gitolite-admin.git" ] ; then
     continue
   fi
-  if [ -d from/$REPO ] ; then
-    echo "from/$REPO is already cloned"
-    pushd from/$REPO
-    git pull origin master
-    popd
-  else
-    git clone $LOCALPATH/repositories/$REPO from/$REPO
-    if [ "$?" = "0" ]; then
-      CONTINUE=1
-    else
-      CONTINUE=0
-    fi
-  fi
-  if [ "$CONTINUE" = "1" ] ; then
-    if [ -d to/$REPO ] ; then
-      echo "to/$REPO is already cloned"
-      pushd to/$REPO
-      git pull origin master
-      popd
-    else
-      git clone $GITOLITEUSER@localhost:$REPO to/$REPO
-    fi
+  git ls-remote $LOCALPATH/repositories/$REPO > /dev/null 2>&1
+  FROMEXISTS=$?
+  git ls-remote $GITOLITEUSER@localhost:$REPO > /dev/null 2>&1
+  TOEXISTS=$?
+  #echo ""
+  # echo "Fromexists: $FROMEXISTS"
+  # echo "Toexists: $TOEXISTS"
+  #echo ""
+
+  if [ "$FROMEXISTS" = "0" ] && [ "$TOEXISTS" = "0" ] ; then
+      echo $REPO":"
+      echo ""
+      #echo "OK"
+      #echo ""
+      if [ -d from/$REPO ] ; then
+        #echo "from/$REPO is already cloned"
+        pushd from/$REPO > /dev/null
+        git pull origin master
+        popd > /dev/null
+      else
+        git clone $LOCALPATH/repositories/$REPO from/$REPO
+        if [ "$?" = "0" ]; then
+          CONTINUE=1
+        else
+          CONTINUE=0
+        fi
+      fi
+      if [ "$CONTINUE" = "1" ] ; then
+        if [ -d to/$REPO ] ; then
+          #echo "to/$REPO is already cloned"
+          pushd to/$REPO > /dev/null
+          git pull origin master
+          popd > /dev/null
+        else
+          git clone $GITOLITEUSER@localhost:$REPO to/$REPO
+        fi
+      fi
+      #echo "DONE"
+      echo ""
+      echo ""
+      echo ""
   fi
 done
 
 
 REPOS=`ls /tmp/gitolite_keep_in_sync/to`
+echo "\"Merging\"..."
+echo ""
 
 for REPO in $REPOS;
 do
- echo $REPO
- pushd /tmp/gitolite_keep_in_sync/to/$REPO
+ pushd /tmp/gitolite_keep_in_sync/to/$REPO > /dev/null
  git remote rm fromrepo
  git remote add fromrepo file:///tmp/gitolite_keep_in_sync/from/$REPO
  git pull fromrepo master
  git push origin master
- popd
-
+ popd > /dev/null
+ echo ""
 done
