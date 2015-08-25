@@ -101,7 +101,10 @@ echo ""
 for REPO in $REPOS;
 do
  pushd /tmp/gitolite_keep_in_sync/to/$REPO > /dev/null
- git remote rm fromrepo
+ git remote -v | grep fromrepo > /dev/null
+ if [ "$?" = "0" ] ; then
+   git remote rm fromrepo
+ fi
  git remote add fromrepo file:///tmp/gitolite_keep_in_sync/from/$REPO
  git pull fromrepo master
  git push origin master
