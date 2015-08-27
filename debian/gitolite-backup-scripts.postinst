@@ -31,10 +31,6 @@ case "$1" in
         echo $SERVER
         db_get gitolite-backup-scripts/encrypted
         ENCRYPTED=$RET
-        db_get gitolite-backup-scripts/salt
-        SALT=$RET
-        db_get gitolite-backup-scripts/key
-        KEY=$RET
 
         mkdir -p /var/lib/backup-gitolite
         chown $USERNAME:$USERNAME /var/lib/backup-gitolite
@@ -48,6 +44,10 @@ case "$1" in
             cd /var/lib/backup-gitolite/$USERNAME
             #PATH="$PATH:/usr/lib/git-encrypt" gitcrypt init 
             if [ "$ENCRYPTED" = "true" ] ; then
+                db_get gitolite-backup-scripts/salt
+                SALT=$RET
+                db_get gitolite-backup-scripts/key
+                KEY=$RET
                 su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/gitconfig /var/lib/backup-gitolite/$USERNAME/.git/config"
                 su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/attributes /var/lib/backup-gitolite/$USERNAME/.git/info/attributes"
                 su $USERNAME -c "sed -i 's/salt = SALT$/salt = ${SALT}/' /var/lib/backup-gitolite/$USERNAME/.git/config"
