@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gitolite-backup-scripts\n"
 "Report-Msgid-Bugs-To: gitolite-backup-scripts@packages.debian.org\n"
-"POT-Creation-Date: 2015-08-01 11:49+0200\n"
+"POT-Creation-Date: 2015-08-27 18:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,23 +20,29 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../templates:1001
-msgid "Enter the user name for the gitolite user"
+msgid "Enter the user name for the gitolite user:"
 msgstr ""
 
 #. Type: string
 #. Description
 #: ../templates:2001
-msgid "Enter the URL for the remote git repo"
+msgid "Enter the URL for the remote git repo:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Should the backup be encrypted?"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:3001
-msgid "Enter the salt"
+#: ../templates:4001
+msgid "Enter the salt:"
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../templates:4001
-msgid "Enter the key"
+#: ../templates:5001
+msgid "Enter the key:"
 msgstr ""

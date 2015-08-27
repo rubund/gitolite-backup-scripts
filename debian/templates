@@ -8,6 +8,11 @@ Type: string
 Default: user@address:/home/user/path
 _Description: Enter the URL for the remote git repo:
 
+Template: gitolite-backup-scripts/encrypted
+Type: boolean
+Default: false
+_Description: Should the backup be encrypted?
+
 Template: gitolite-backup-scripts/salt
 Type: string
 Default: 

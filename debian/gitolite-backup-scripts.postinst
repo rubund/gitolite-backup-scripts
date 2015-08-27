@@ -29,6 +29,8 @@ case "$1" in
         echo $SERVER
         #SERVER=`echo $SERVER | sed -e 's/[\/&]/\\&/g'`
         echo $SERVER
+        db_get gitolite-backup-scripts/encrypted
+        ENCRYPTED=$RET
         db_get gitolite-backup-scripts/salt
         SALT=$RET
         db_get gitolite-backup-scripts/key
@@ -45,10 +47,12 @@ case "$1" in
             su $USERNAME -c "git init /var/lib/backup-gitolite/$USERNAME"
             cd /var/lib/backup-gitolite/$USERNAME
             #PATH="$PATH:/usr/lib/git-encrypt" gitcrypt init 
-            su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/gitconfig /var/lib/backup-gitolite/$USERNAME/.git/config"
-            su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/attributes /var/lib/backup-gitolite/$USERNAME/.git/info/attributes"
-            su $USERNAME -c "sed -i 's/salt = SALT$/salt = ${SALT}/' /var/lib/backup-gitolite/$USERNAME/.git/config"
-            su $USERNAME -c "sed -i 's/pass = PASS$/pass = ${KEY}/' /var/lib/backup-gitolite/$USERNAME/.git/config"
+            if [ "$ENCRYPTED" = "true" ] ; then
+                su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/gitconfig /var/lib/backup-gitolite/$USERNAME/.git/config"
+                su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/attributes /var/lib/backup-gitolite/$USERNAME/.git/info/attributes"
+                su $USERNAME -c "sed -i 's/salt = SALT$/salt = ${SALT}/' /var/lib/backup-gitolite/$USERNAME/.git/config"
+                su $USERNAME -c "sed -i 's/pass = PASS$/pass = ${KEY}/' /var/lib/backup-gitolite/$USERNAME/.git/config"
+            fi
             su $USERNAME -c "git remote add origin ${SERVER}"
         fi
         sed -i 's/GITOLITEUSER=.*$/GITOLITEUSER='${USERNAME}'/' /etc/gitolite-backup-scripts.conf
