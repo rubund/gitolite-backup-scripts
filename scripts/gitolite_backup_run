@@ -12,6 +12,15 @@ git add */.*
 git commit -m "Regular commit"
 NOTHING=$?
 
+
 if [ "$NOTHING" = "0" ] ; then
+  touch /var/lib/backup-gitolite/dirty.tmp
+fi
+
+if [ -f /var/lib/backup-gitolite/dirty.tmp ] ; then
   git push origin master
+  COMPLETE=$?
+  if [ "$COMPLETE" = "0" ] ; then
+    rm -f /var/lib/backup-gitolite/dirty.tmp
+  fi
 fi
