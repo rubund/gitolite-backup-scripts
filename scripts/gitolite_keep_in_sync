@@ -67,7 +67,7 @@ do
         #echo "from/$REPO is already cloned"
         pushd from/$REPO > /dev/null
         git pull origin master
-        git pull origin --tags
+        git pull origin master --tags
         popd > /dev/null
       else
         git clone $LOCALPATH/repositories/$REPO from/$REPO
@@ -82,7 +82,7 @@ do
           #echo "to/$REPO is already cloned"
           pushd to/$REPO > /dev/null
           git pull origin master
-          git pull origin --tags
+          git pull origin master --tags
           popd > /dev/null
         else
           git clone $GITOLITEUSER@localhost:$REPO to/$REPO
@@ -109,9 +109,9 @@ do
  fi
  git remote add fromrepo file:///tmp/gitolite_keep_in_sync/from/$REPO
  git pull fromrepo master
- git pull fromrepo --tags
+ git pull fromrepo master --tags
  git push origin master
- git push origin --tags
+ git push origin master --tags
  popd > /dev/null
  echo ""
 done
