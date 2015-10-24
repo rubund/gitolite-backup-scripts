@@ -8,7 +8,7 @@ Standards-Version: 3.9.6
 Package: gitolite-backup-scripts
 Architecture: all
 Depends: ${misc:Depends}, rsync, git,
-         openssh-client, gitolite3, git-encrypt
+         openssh-client, gitolite3, git-encrypt (= ${binary:Version})
 Description: Scripts for backing up gitolite setup via encrypted git
  If you would like to backup all the git repositories in the gitolite
  install, this package may be useful. It creates an encrypted git
