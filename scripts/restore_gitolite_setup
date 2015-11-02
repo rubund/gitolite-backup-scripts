@@ -40,6 +40,8 @@ chmod go+rx gitolite3
 pushd /var/lib/gitolite3
 rm -rf .git 
 rm -f .gitignore
+mkdir -p .gitolite/logs
+chown gitolite3:gitolite3 .gitolite/logs
 popd
 
 popd
