@@ -45,3 +45,6 @@ chown gitolite3:gitolite3 .gitolite/logs
 popd
 
 popd
+
+cp /usr/share/gitolite-backup-scripts/gitignore /var/lib/backup-gitolite/gitolite3/.gitignore
+chown gitolite3:gitolite3 /var/lib/backup-gitolite/gitolite3/.gitignore
