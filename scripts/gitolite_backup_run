@@ -2,7 +2,7 @@
 
 export PATH="$PATH:/usr/lib/git-encrypt"
 
-rsync -a -v -u /var/lib/gitolite3/ /var/lib/backup-gitolite/gitolite3
+rsync -a -v -u -l /var/lib/gitolite3/ /var/lib/backup-gitolite/gitolite3
 
 
 cd /var/lib/backup-gitolite/gitolite3
