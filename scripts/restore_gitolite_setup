@@ -37,11 +37,9 @@ chown -R gitolite3:gitolite3 gitolite3
 chmod -R go-rwx gitolite3
 chmod go+rx gitolite3
 
-pushd gitolite3
+pushd /var/lib/gitolite3
 rm -rf .git 
 rm -f .gitignore
-git remote add origin $1
-git branch -u origin/master master
 popd
 
 popd
