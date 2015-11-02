@@ -1,6 +1,7 @@
 scripts/gitolite_backup_run /usr/lib/gitolite-backup-scripts/bin/
 scripts/get_backup_gitolite /usr/bin/
 scripts/gitolite_keep_in_sync /usr/bin/
+scripts/restore_gitolite_setup /usr/bin/
 config/gitconfig /usr/share/gitolite-backup-scripts/
 config/attributes /usr/share/gitolite-backup-scripts/
 config/gitolite-backup-scripts.conf /etc/

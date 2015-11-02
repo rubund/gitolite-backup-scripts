@@ -1,0 +1,43 @@
+#!/bin/bash
+
+export PATH=$PATH:/usr/lib/gitolite-backup-scripts/bin
+
+CURRENTUSER=`whoami`
+
+if [ "$CURRENTUSER" != "root" ] ;
+then
+    echo "It needs to be run as root!"
+    exit -1
+fi
+
+if [ "$1" = "" ] ; then
+    echo "Missing argument"
+    exit -1
+fi
+
+
+
+pushd /var/lib
+
+mv gitolite3 gitolite3.old
+pushd  /var/lib/backup-gitolite
+
+
+mv gitolite3 gitolite3.old
+get_backup_gitolite $1 gitolite3
+chown -R gitolite3:gitolite3 gitolite3
+chmod -R go-rwx gitolite3
+chmod go+rx gitolite3
+
+cp -r gitolite3 ../ 
+
+popd
+
+chown -R gitolite3:gitolite3 gitolite3
+chmod -R go-rwx gitolite3
+chmod go+rx gitolite3
+
+rm -rf gitolite3/.git 
+rm -f gitolite3/.gitignore
+
+popd
