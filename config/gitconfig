@@ -3,12 +3,3 @@
 	filemode = true
 	bare = false
 	logallrefupdates = true
-[gitcrypt]
-	salt = SALT
-	pass = PASS
-	cipher = aes-256-ecb
-[filter "encrypt"]
-	smudge = gitcrypt smudge
-	clean = gitcrypt clean
-[diff "encrypt"]
-	textconv = gitcrypt diff

@@ -1,3 +1,1 @@
-* filter=encrypt diff=encrypt
-[merge]
-    renormalize=true
+* filter=git-crypt diff=git-crypt
