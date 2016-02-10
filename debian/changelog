@@ -1,3 +1,9 @@
+gitolite-backup-scripts (2.0~alpha) unstable; urgency=medium
+
+  * Switch to git-crypt
+
+ -- Ruben Undheim <ruben.undheim@gmail.com>  Wed, 10 Feb 2016 23:21:39 +0100
+
 gitolite-backup-scripts (1.2) unstable; urgency=medium
 
   * Handles tags as well 
