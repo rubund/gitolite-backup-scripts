@@ -7,6 +7,12 @@ cd /var/lib/backup-gitolite/gitolite3
 
 git add *
 git add */.*
+if [ -f .gitattributes ] ; then
+ git add .gitattributes
+fi
+if [ -f .gitignore ] ; then
+ git add .gitignore
+fi
 git commit -m "Regular commit"
 NOTHING=$?
 

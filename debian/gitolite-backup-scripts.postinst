@@ -45,7 +45,7 @@ case "$1" in
             su $USERNAME -c "git-crypt init"
             #PATH="$PATH:/usr/lib/git-encrypt" gitcrypt init 
             if [ "$ENCRYPTED" = "true" ] ; then
-                su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/attributes /var/lib/backup-gitolite/$USERNAME/.git/info/attributes"
+                su $USERNAME -c "cp /usr/share/gitolite-backup-scripts/attributes /var/lib/backup-gitolite/$USERNAME/.gitattributes"
             fi
             su $USERNAME -c "git remote add origin ${SERVER}"
         fi
