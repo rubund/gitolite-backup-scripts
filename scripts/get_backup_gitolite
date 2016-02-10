@@ -15,9 +15,8 @@ if [ "$LOCALPATH" = "" ] ; then
   exit
 fi
 
-git clone -n $BACKUPPATH $LOCALPATH
+git clone $BACKUPPATH $LOCALPATH
 
 cd $LOCALPATH
-gitcrypt init
+git-crypt unlock
 
-git reset --hard HEAD
