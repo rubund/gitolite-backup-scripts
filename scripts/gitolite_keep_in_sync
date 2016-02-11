@@ -49,10 +49,13 @@ do
   if [ "$REPO" = "gitolite-admin.git" ] ; then
     continue
   fi
-  git ls-remote $LOCALPATH/repositories/$REPO > /dev/null 2>&1
+  FROMID=`git ls-remote $LOCALPATH/repositories/$REPO HEAD 2>/dev/null`
   FROMEXISTS=$?
-  git ls-remote $GITOLITEUSER@localhost:$REPO > /dev/null 2>&1
+  TOID=`git ls-remote $GITOLITEUSER@localhost:$REPO HEAD 2>/dev/null`
   TOEXISTS=$?
+
+  FROMID=`echo $FROMID | head -n 1 | cut -c 1-40` 2>/dev/null
+  TOID=`echo $TOID | head -n 1 | cut -c 1-40` 2>/dev/null
   #echo ""
   # echo "Fromexists: $FROMEXISTS"
   # echo "Toexists: $TOEXISTS"
@@ -61,34 +64,40 @@ do
   if [ "$FROMEXISTS" = "0" ] && [ "$TOEXISTS" = "0" ] ; then
       echo $REPO":"
       echo ""
+        echo "FROMID: "$FROMID
+        echo "TOID: "$TOID
       #echo "OK"
       #echo ""
-      if [ -d from/$REPO ] ; then
-        #echo "from/$REPO is already cloned"
-        pushd from/$REPO > /dev/null
-        git pull origin master
-        git pull origin master --tags
-        popd > /dev/null
-      else
-        git clone $LOCALPATH/repositories/$REPO from/$REPO
-        if [ "$?" = "0" ]; then
-          CONTINUE=1
-        else
-          CONTINUE=0
-        fi
-      fi
-      if [ "$CONTINUE" = "1" ] ; then
-        if [ -d to/$REPO ] ; then
-          #echo "to/$REPO is already cloned"
-          pushd to/$REPO > /dev/null
+      if [ "$FROMID" != "$TOID" ] ;then
+        if [ -d from/$REPO ] ; then
+          #echo "from/$REPO is already cloned"
+          pushd from/$REPO > /dev/null
           git pull origin master
           git pull origin master --tags
           popd > /dev/null
         else
-          git clone $GITOLITEUSER@localhost:$REPO to/$REPO
+          git clone $LOCALPATH/repositories/$REPO from/$REPO
+          if [ "$?" = "0" ]; then
+            CONTINUE=1
+          else
+            CONTINUE=0
+          fi
         fi
+        if [ "$CONTINUE" = "1" ] ; then
+          if [ -d to/$REPO ] ; then
+            #echo "to/$REPO is already cloned"
+            pushd to/$REPO > /dev/null
+            git pull origin master
+            git pull origin master --tags
+            popd > /dev/null
+          else
+            git clone $GITOLITEUSER@localhost:$REPO to/$REPO
+          fi
+        fi
+        #echo "DONE"
+      else
+        echo "Already the same"
       fi
-      #echo "DONE"
       echo ""
       echo ""
       echo ""
