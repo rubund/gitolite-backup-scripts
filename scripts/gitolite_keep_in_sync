@@ -11,6 +11,7 @@ source /etc/gitolite-backup-scripts.conf
 BACKUPPATH=$1
 LOCALPATH=$2
 
+TMPWORKDIR=`mktemp -d`
 
 if [ "$BACKUPPATH" = "" ] ; then
   echo "Missing backup path"
@@ -35,9 +36,9 @@ echo ""
 echo ""
 echo ""
 
-mkdir -p /tmp/gitolite_keep_in_sync
-chmod go-rwx /tmp/gitolite_keep_in_sync
-cd /tmp/gitolite_keep_in_sync
+mkdir -p $TMPWORKDIR
+chmod go-rwx $TMPWORKDIR
+cd $TMPWORKDIR
 
 REPOS=`ls ${LOCALPATH}/repositories`
 
@@ -105,18 +106,18 @@ do
 done
 
 
-REPOS=`ls /tmp/gitolite_keep_in_sync/to`
+REPOS=`ls $TMPWORKDIR/to`
 echo "\"Merging\"..."
 echo ""
 
 for REPO in $REPOS;
 do
- pushd /tmp/gitolite_keep_in_sync/to/$REPO > /dev/null
+ pushd $TMPWORKDIR/to/$REPO > /dev/null
  git remote -v | grep fromrepo > /dev/null
  if [ "$?" = "0" ] ; then
    git remote rm fromrepo
  fi
- git remote add fromrepo file:///tmp/gitolite_keep_in_sync/from/$REPO
+ git remote add fromrepo file://$TMPWORKDIR/from/$REPO
  git pull fromrepo master
  git pull fromrepo master --tags
  git push origin master
@@ -125,4 +126,4 @@ do
  echo ""
 done
 
-rm -rf /tmp/gitolite_keep_in_sync
+rm -rf $TMPWORKDIR
